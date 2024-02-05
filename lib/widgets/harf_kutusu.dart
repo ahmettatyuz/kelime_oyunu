@@ -28,7 +28,12 @@ class _HarfState extends State<Harf> {
       margin: const EdgeInsets.symmetric(vertical: 3),
       padding: const EdgeInsets.all(10),
       child: Text(
-        widget.harf.toUpperCase().replaceAll("-", "").replaceAll("+", "").replaceAll("?", ""),
+        widget.harf
+            .replaceAll("i", "İ")
+            .toUpperCase()
+            .replaceAll("-", "")
+            .replaceAll("+", "")
+            .replaceAll("?", ""),
         // widget.harf.toUpperCase(),
         style: Theme.of(context)
             .textTheme

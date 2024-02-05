@@ -252,7 +252,7 @@ class _OyunState extends State<Oyun> {
                                 !widget.oyunBitti
                             ? () {
                                 tahmin(
-                                    widget.tahminController.text.toUpperCase());
+                                    widget.tahminController.text.toLowerCase());
                                 setState(() {
                                   widget.hak--;
                                 });

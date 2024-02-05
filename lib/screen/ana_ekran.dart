@@ -20,7 +20,7 @@ class _AnaEkranState extends State<AnaEkran> {
   final CountDownController timerController = CountDownController();
   @override
   Widget build(BuildContext context) {
-    List kelime = yeniKelime().toUpperCase().split("");
+    List kelime = yeniKelime().toLowerCase().split("");
     return Column(
       children: [
         ElevatedButton(
