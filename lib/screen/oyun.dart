@@ -1,6 +1,7 @@
 import 'package:circular_countdown_timer/circular_countdown_timer.dart';
 import 'package:circular_countdown_timer/countdown_text_format.dart';
 import 'package:flutter/material.dart';
+import 'package:kelime_oyunu/helpers/stringHelper.dart';
 import 'package:kelime_oyunu/widgets/harf_kutusu.dart';
 import 'package:timer_count_down/timer_controller.dart';
 import 'package:timer_count_down/timer_count_down.dart';
@@ -148,7 +149,7 @@ class _OyunState extends State<Oyun> {
                             : Theme.of(context).colorScheme.error,
                       ),
                       child: Text(
-                        widget.mesaj,
+                        upperCase(widget.mesaj),
                         style: Theme.of(context)
                             .textTheme
                             .bodyMedium!

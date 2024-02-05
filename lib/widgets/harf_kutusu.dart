@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:kelime_oyunu/helpers/stringHelper.dart';
 
 class Harf extends StatefulWidget {
   const Harf({super.key, required this.harf});
@@ -28,12 +29,10 @@ class _HarfState extends State<Harf> {
       margin: const EdgeInsets.symmetric(vertical: 3),
       padding: const EdgeInsets.all(10),
       child: Text(
-        widget.harf
-            .replaceAll("i", "İ")
-            .toUpperCase()
+        upperCase(widget.harf
             .replaceAll("-", "")
             .replaceAll("+", "")
-            .replaceAll("?", ""),
+            .replaceAll("?", "")),
         // widget.harf.toUpperCase(),
         style: Theme.of(context)
             .textTheme
