@@ -1,10 +1,9 @@
+// ignore_for_file: must_be_immutable
+
 import 'package:circular_countdown_timer/circular_countdown_timer.dart';
-import 'package:circular_countdown_timer/countdown_text_format.dart';
 import 'package:flutter/material.dart';
 import 'package:kelime_oyunu/helpers/stringHelper.dart';
 import 'package:kelime_oyunu/widgets/harf_kutusu.dart';
-import 'package:timer_count_down/timer_controller.dart';
-import 'package:timer_count_down/timer_count_down.dart';
 
 class Oyun extends StatefulWidget {
   Oyun({super.key, required this.kelime, required this.timerController});
@@ -33,8 +32,8 @@ class _OyunState extends State<Oyun> {
   }
 
   void tahmin(String tahminKelime) {
-    print("tahmin edilen kelime $tahminKelime");
-    print("asıl kelime kelime ${widget.kelime.join()}");
+    debugPrint("tahmin edilen kelime $tahminKelime");
+    debugPrint("asıl kelime kelime ${widget.kelime.join()}");
     for (int j = 0; j < widget.kelime.length; j++) {
       if (widget.kelime[j] == tahminKelime[j]) {
         widget.gorunenKelimeler[widget.tahminSayisi][j] = "+${tahminKelime[j]}";
@@ -66,12 +65,6 @@ class _OyunState extends State<Oyun> {
       gorunenKelime.add("  ");
     }
     return gorunenKelime;
-  }
-
-  @override
-  void initState() {
-    // TODO: implement initState
-    super.initState();
   }
 
   @override
@@ -214,7 +207,7 @@ class _OyunState extends State<Oyun> {
                 Expanded(
                   child: TextField(
                     onChanged: (word) {
-                      print(word);
+                      debugPrint(word);
                       if (word.length == widget.kelime.length) {
                         widget.tahminEdebilir = true;
                       } else {
