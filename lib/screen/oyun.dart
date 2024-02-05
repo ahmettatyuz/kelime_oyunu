@@ -40,7 +40,9 @@ class _OyunState extends State<Oyun> {
       } else {
         widget.gorunenKelimeler[widget.tahminSayisi][j] = "-${tahminKelime[j]}";
       }
+    }
 
+    for (int j = 0; j < widget.kelime.length; j++) {
       if (widget.kelime.contains(tahminKelime[j]) &&
           !widget.gorunenKelimeler[widget.tahminSayisi]
               .contains("+${tahminKelime[j]}")) {
@@ -207,6 +209,8 @@ class _OyunState extends State<Oyun> {
                 Expanded(
                   child: TextField(
                     onChanged: (word) {
+                      word = word.trim();
+                      widget.tahminController.text = word;
                       debugPrint(word);
                       if (word.length == widget.kelime.length) {
                         widget.tahminEdebilir = true;
