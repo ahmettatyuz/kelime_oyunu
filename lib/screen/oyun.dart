@@ -80,13 +80,10 @@ class _OyunState extends State<Oyun> {
       widget.mesaj = "Tebrikler";
       widget.oyunBitti = true;
     } else if (kaybettiMi()) {
-      print("oyunu kaybetti");
       widget.mesaj = "KELİME ŞUYDU : ${widget.kelime.join()}";
       widget.oyunBitti = true;
-      print("oyun bitti ${widget.oyunBitti}");
     }
     if (widget.oyunBitti) {
-      print("oyun bitti");
       widget.timerController.pause();
     }
 
@@ -137,24 +134,28 @@ class _OyunState extends State<Oyun> {
           // ),
           Row(
             crossAxisAlignment: CrossAxisAlignment.center,
-            mainAxisAlignment: MainAxisAlignment.spaceEvenly,
+            mainAxisAlignment: widget.mesaj.isNotEmpty
+                ? MainAxisAlignment.spaceEvenly
+                : MainAxisAlignment.center,
             children: [
-              Container(
-                padding: const EdgeInsets.all(5),
-                decoration: BoxDecoration(
-                  borderRadius: BorderRadius.circular(10),
-                  color: widget.oyunBitti && widget.kazandiMi
-                      ? Theme.of(context).colorScheme.primary
-                      : Theme.of(context).colorScheme.error,
-                ),
-                child: Text(
-                  widget.mesaj,
-                  style: Theme.of(context)
-                      .textTheme
-                      .bodyMedium!
-                      .copyWith(color: Colors.white),
-                ),
-              ),
+              widget.mesaj.isNotEmpty
+                  ? Container(
+                      padding: const EdgeInsets.all(5),
+                      decoration: BoxDecoration(
+                        borderRadius: BorderRadius.circular(10),
+                        color: widget.oyunBitti && widget.kazandiMi
+                            ? Theme.of(context).colorScheme.primary
+                            : Theme.of(context).colorScheme.error,
+                      ),
+                      child: Text(
+                        widget.mesaj,
+                        style: Theme.of(context)
+                            .textTheme
+                            .bodyMedium!
+                            .copyWith(color: Colors.white),
+                      ),
+                    )
+                  : const SizedBox(width: 0),
               CircularCountDownTimer(
                 duration: widget.sure,
                 initialDuration: 0,
@@ -163,7 +164,9 @@ class _OyunState extends State<Oyun> {
                 height: 50,
                 ringColor: Colors.grey[300]!,
                 ringGradient: null,
-                fillColor: Theme.of(context).colorScheme.primary,
+                fillColor: kaybettiMi()
+                    ? Theme.of(context).colorScheme.error
+                    : Theme.of(context).colorScheme.primary,
                 fillGradient: null,
                 backgroundColor: Theme.of(context).colorScheme.secondary,
                 backgroundGradient: null,
