@@ -6,11 +6,16 @@ import 'package:kelime_oyunu/helpers/stringHelper.dart';
 import 'package:kelime_oyunu/widgets/harf_kutusu.dart';
 
 class Oyun extends StatefulWidget {
-  Oyun({super.key, required this.kelime, required this.timerController});
+  Oyun(
+      {super.key,
+      required this.kelime,
+      required this.timerController,
+      required this.sonraki});
   final List kelime;
   final CountDownController timerController;
-  int hak = 4; // parametre olarak verilecek
-  int sure = 10;
+  final void Function() sonraki;
+  int hak = 5; // parametre olarak verilecek
+  int sure = 40;
   List gorunenKelime = []; // parametre olarak verilecek
   int tahminSayisi = 0; // parametre
   List gorunenKelimeler = []; // parametre
@@ -99,35 +104,25 @@ class _OyunState extends State<Oyun> {
     return SingleChildScrollView(
       child: Column(
         children: [
-          Column(children: [
-            ...widget.gorunenKelimeler.map(
-              (e) => Row(
-                mainAxisAlignment: MainAxisAlignment.spaceAround,
-                children: [...e.map((e2) => Harf(harf: e2))],
-              ),
-            )
-          ]),
+          widget.oyunBitti
+              ? ElevatedButton(
+                  onPressed: widget.sonraki,
+                  child: const Text("Sonraki"),
+                )
+              : Container(),
+          Column(
+            children: [
+              ...widget.gorunenKelimeler.map(
+                (e) => Row(
+                  mainAxisAlignment: MainAxisAlignment.spaceAround,
+                  children: [...e.map((e2) => Harf(harf: e2))],
+                ),
+              )
+            ],
+          ),
           const SizedBox(
             height: 10,
           ),
-          // Countdown(
-          //   controller: widget.timerController,
-          //   seconds: widget.sure,
-          //   build: (_, double time) => Text(
-          //     time.toString(),
-          //     style: const TextStyle(
-          //       fontSize: 20,
-          //     ),
-          //   ),
-          //   interval: const Duration(milliseconds: 100),
-          //   onFinished: () {
-          //     ScaffoldMessenger.of(context).showSnackBar(
-          //       const SnackBar(
-          //         content: Text('Timer is done!'),
-          //       ),
-          //     );
-          //   },
-          // ),
           Row(
             crossAxisAlignment: CrossAxisAlignment.center,
             mainAxisAlignment: widget.mesaj.isNotEmpty
@@ -199,7 +194,6 @@ class _OyunState extends State<Oyun> {
               ),
             ],
           ),
-
           Container(
             padding: const EdgeInsets.all(5),
             child: Row(
